@@ -55,11 +55,6 @@ Set-Alias -Name chrome  -Value 'C:\Program Files\Google\Chrome\Application\chrom
 Set-Alias -Name fox  -Value 'C:\Program Files\Firefox Developer Edition\firefox.exe'
 Set-Alias -Name code  -Value 'C:\Users\jorge\AppData\Local\Programs\Microsoft VS Code\Code.exe'
 Set-Alias -Name wt -Value 'C:\Users\jorge\AppData\Local\Microsoft\WindowsApps\wt.exe'
-Set-Alias -Name iqrlsp -Value Invoke-QA-ReportingLayerStoredProc
-Set-Alias -Name iprlsp -Value Invoke-PROD-ReportingLayerStoredProc
-
-
-
 
 #FUNCTIONS 
 function fnHistory{

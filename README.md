@@ -3,16 +3,16 @@ An example of what this profile should look like
 
 ![Example](/example.jpg)
 
-##About the examples
+## About the examples
 The profile's main function is prompt and that's what it used to generate the nice looking ligatures you see in the photo. If you're able to use it without installing any powershell modules(because you have the required modules installed) all you'll need is the 3 powershell scripts that I got from [Lee Holmes' PowerShell Cookbook]( https://www.amazon.com/PowerShell-Cookbook-Scripting-Ubiquitous-Object-Based/dp/109810160X/) I can't say enough good things about it. I've had my fair share of fist fights trying to get my windows terminal profile to look just the way I want it to but was never able to until I picked this book up. Lee's scripts give PowerShell the ability to suggest alias names for cmdlets and their paramters.
 
-##Apps Needed
-[Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701#activetab=pivot:overviewtab)
+## Apps Needed
+[Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701#activetab=pivot:overviewtab) is preferred but no necessary, and I also recommend using the new
 [PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-windows?view=powershell-7.1)
-Git is also needed but that should be installed
-##Font I use
+, lastly Git is needed but that should be installed.
+## Font I use
 [Nerd Font](https://github.com/ryanoasis/nerd-fonts) I've linked NerdFonts, the font I use is Agave Nerd Fonts
-##PowerShell Modules
+## PowerShell Modules
 Once PowerShell is installed and you have Windows Terminal open you'll need to install these Modules.
 oh-my-posh and posh-git. 
 ```
@@ -23,7 +23,7 @@ Install-Module oh-my-posh -Scope CurrentUser -RequiredVersion 2.0.412
 The current user is whoever is logged in right now. That concept was kind of tricky to understand for me so I felt I should explain.
 
 When I first tried to install these I had to install them from an elevated session(PowerShell talk for: Open Start-> Search for PowerShell by typing "PowerShell"-> When it's visible R.Click->Select Open as administrator).
-##PowerShell Profile
+## PowerShell Profile
 Download and save all the ps1 files except profile.ps1. Save them to folder named 'Temp' in your C drive. Don't have one?
 run this in Windows Terminal
 ```

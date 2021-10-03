@@ -50,11 +50,11 @@ Set-Alias -Name npp -Value 'C:\Program Files (x86)\Notepad++\notepad++.exe'
 Set-Alias -Name np -Value '%windir%\system32\notepad.exe'
 Set-Alias -Name Keep-History -Value fnHistory
 Set-Alias -Name new -Value New-Item
-Set-Alias -Name edge  -Value '%userprofile%\AppData\Local\Microsoft\*\MicrosoftEdge.exe'
+Set-Alias -Name edge  -Value $Env:UserProfile"\AppData\Local\Microsoft\*\MicrosoftEdge.exe"
 Set-Alias -Name chrome  -Value 'C:\Program Files\Google\Chrome\Application\chrome.exe'
 Set-Alias -Name fox  -Value 'C:\Program Files\Firefox Developer Edition\firefox.exe'
-Set-Alias -Name code  -Value '%userprofile%\AppData\Local\Programs\Microsoft VS Code\Code.exe'
-Set-Alias -Name wt -Value '%userprofile%\AppData\Local\Microsoft\WindowsApps\wt.exe'
+Set-Alias -Name code  -Value $Env:UserProfile"\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+Set-Alias -Name wt -Value $Env:UserProfile"\AppData\Local\Microsoft\WindowsApps\wt.exe"
 
 #FUNCTIONS 
 function fnHistory{

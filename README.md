@@ -15,9 +15,9 @@ The profile's main function is prompt and that's what it used to generate the ni
 ## PowerShell Modules
 Once PowerShell is installed and you have Windows Terminal open you'll need to install these Modules. 
 ```
-Install-Module posh-git -Scope CurrentUser
-Install-Module oh-my-posh -Scope CurrentUser -RequiredVersion 2.0.412
-Install-Module Terminal-Icons
+Install-Module posh-git -Scope CurrentUser -Confirm:$false
+Install-Module oh-my-posh -Scope CurrentUser -RequiredVersion 2.0.412 -Confirm:$false
+Install-Module Terminal-Icons  -Confirm:$false
 Install-Module PSReadline -AllowPrerelease -Force
 ```
 "-Scope CurrentUser" just tells PowerShell to only install these modules for the current user.

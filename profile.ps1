@@ -28,7 +28,7 @@ Import-Module oh-my-posh -SkipEditionCheck
 Import-Module PSReadLine
 Import-Module Terminal-Icons
 
-Set-PoshPrompt -Theme powerlevel10k_rainbow
+#Set-PoshPrompt -Theme powerlevel10k_rainbow
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -EditMode Windows

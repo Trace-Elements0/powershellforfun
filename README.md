@@ -13,11 +13,12 @@ The profile's main function is prompt and that's what it used to generate the ni
 ## Font I use
 [Nerd Font](https://github.com/ryanoasis/nerd-fonts) I've linked NerdFonts, the font I use is Agave Nerd Fonts
 ## PowerShell Modules
-Once PowerShell is installed and you have Windows Terminal open you'll need to install these Modules.
-oh-my-posh and posh-git. 
+Once PowerShell is installed and you have Windows Terminal open you'll need to install these Modules. 
 ```
 Install-Module posh-git -Scope CurrentUser
 Install-Module oh-my-posh -Scope CurrentUser -RequiredVersion 2.0.412
+Install-Module Terminal-Icons
+Install-Module PSReadline -AllowPrerelease -Force
 ```
 "-Scope CurrentUser" just tells PowerShell to only install these modules for the current user.
 The current user is whoever is logged in right now. That concept was kind of tricky to understand for me so I felt I should explain.
@@ -42,13 +43,9 @@ Lastly reload you profile
 . $profile
 ```
 At this point your windows terminal should look pretty cool but if not, I've linked the resources I used in the past to learn how to setup my powershell profile.
-
-
-https://www.youtube.com/watch?v=lu__oGZVT98&feature=emb_imp_woyt
-https://www.leeholmes.com/
-https://www.networkadm.in/customize-pscmdprompt/
-https://docs.microsoft.com/en-us/powershell/scripting/developer/module/installing-a-powershell-module?view=powershell-7.1
-https://ohmyposh.dev/
-https://www.neolisk.blog/posts/2009-07-23-powershell-special-characters/
-
-
+- https://www.youtube.com/watch?v=lu__oGZVT98&feature=emb_imp_woyt
+- https://www.leeholmes.com
+- https://www.networkadm.in/customize-pscmdprompt
+- https://docs.microsoft.com/en-us/powershell/scripting/developer/module/installing-a-powershell-module?view=powershell-7.1
+- https://ohmyposh.dev
+- https://www.neolisk.blog/posts/2009-07-23-powershell-special-characters

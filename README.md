@@ -17,8 +17,8 @@ Once PowerShell is installed and you have Windows Terminal open you'll need to i
 ```
 Install-Module posh-git -Scope CurrentUser -Confirm:$false
 Install-Module oh-my-posh -Scope CurrentUser -RequiredVersion 2.0.412 -Confirm:$false
-Install-Module Terminal-Icons  -Confirm:$false
-Install-Module PSReadline -AllowPrerelease -Force
+Install-Module Terminal-Icons -Scope CurrentUser -Confirm:$false
+Install-Module PSReadline -Scope CurrentUser -AllowPrerelease -Force
 ```
 "-Scope CurrentUser" just tells PowerShell to only install these modules for the current user.
 The current user is whoever is logged in right now. That concept was kind of tricky to understand for me so I felt I should explain.

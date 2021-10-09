@@ -12,7 +12,7 @@ If(-not(Get-InstalledModule posh-git -ErrorAction silentlycontinue)){
 If(-not(Get-InstalledModule oh-my-posh -ErrorAction silentlycontinue)){
 	Install-Module oh-my-posh -Scope CurrentUser -RequiredVersion 2.0.412 -Confirm:$False -Force
 }
-If(-not(Get-InstalledModule PSReadline -ErrorAction silentlycontinue)){
+If(-not(Get-InstalledModule PSReadline -AllowPrerelease -ErrorAction silentlycontinue)){
 	Install-Module PSReadline -Scope CurrentUser -AllowPrerelease -Confirm:$False -Force
 }
 If(-not(Get-InstalledModule Terminal-Icons -ErrorAction silentlycontinue)){

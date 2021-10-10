@@ -29,8 +29,8 @@ If(!(Test-Path $profile)){
 ###################################################
 # CREATE BLANK C:\TEMP FOLDER IF ONE DOESNT EXIST #
 ###################################################
-If(!(Test-Path "C:\Temp")){
-	New-Item -ItemType Directory -Path "C:\" -Name "Temp"
+If(!(Test-Path $($env:HOMEDRIVE + '\Temp'))){
+	New-Item -ItemType Directory -Path $env:HOMEDRIVE -Name "Temp"
 }
 
 ##################################

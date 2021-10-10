@@ -22,13 +22,11 @@ Write-Host "PowerShell Version: $($psversiontable.psversion) - ExecutionPolicy: 
 #############
 # IMPORTS   #
 #############
-#IMPORTS#Set-PoshPrompt -Theme ys
 Import-Module posh-git -SkipEditionCheck
 Import-Module oh-my-posh -SkipEditionCheck
 Import-Module PSReadLine
 Import-Module Terminal-Icons
 
-#Set-PoshPrompt -Theme powerlevel10k_rainbow
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -EditMode Windows
@@ -46,29 +44,33 @@ Set-PSReadLineKeyHandler -Chord 'Alt+.' -ScriptBlock {
 ###########
 # ALIASES #
 ###########
-Set-Alias -Name npp -Value 'C:\Program Files (x86)\Notepad++\notepad++.exe'
-Set-Alias -Name np -Value '%windir%\system32\notepad.exe'
-Set-Alias -Name Keep-History -Value fnHistory
 Set-Alias -Name new -Value New-Item
-Set-Alias -Name edge  -Value $Env:UserProfile"\AppData\Local\Microsoft\*\MicrosoftEdge.exe"
-Set-Alias -Name chrome  -Value 'C:\Program Files\Google\Chrome\Application\chrome.exe'
-Set-Alias -Name fox  -Value 'C:\Program Files\Firefox Developer Edition\firefox.exe'
-Set-Alias -Name code  -Value $Env:UserProfile"\AppData\Local\Programs\Microsoft VS Code\Code.exe"
-Set-Alias -Name wt -Value $Env:UserProfile"\AppData\Local\Microsoft\WindowsApps\wt.exe"
+Set-Alias -Name Keep-History -Value fnHistory
+Set-Alias -Name np -Value $env:windir + '\system32\notepad.exe'
+Set-Alias -Name npp -Value $env:ProgramFiles + '\Notepad++\notepad++.exe'
+Set-Alias -Name edge -Value $env:LOCALAPPDATA + '\Microsoft\*\MicrosoftEdge.exe'
+Set-Alias -Name chrome -Value $env:ProgramFiles + '\Google\Chrome\Application\chrome.exe'
+Set-Alias -Name fox -Value $env:ProgramFiles + '\Firefox Developer Edition\firefox.exe'
+Set-Alias -Name code -Value $env:LOCALAPPDATA + '\Programs\Microsoft VS Code\Code.exe'
+Set-Alias -Name wt -Value $env:LOCALAPPDATA + '\Microsoft\WindowsApps\wt.exe'
 
-#FUNCTIONS 
+#############
+# FUNCTIONS #
+############# 
 function fnHistory{
-Get-History | Foreach-Object {$_.CommandLine } > C:\Temp\script.ps1
-notepad C:\Temp\script.ps1
+	Get-History | Foreach-Object {$_.CommandLine } > C:\Temp\script.ps1
+	notepad C:\Temp\script.ps1
 }
 function browseFox{
-	'C:\Program Files\Firefox Developer Edition\firefox.exe' + 'https://www.google.com/search?client=firefox-b-1-d&q=boat'
+	$env:ProgramFiles + '\Firefox Developer Edition\firefox.exe' + 'https://www.google.com/search?client=firefox-b-1-d&q=boat'
 }
 
-##########
-# PROMPT #
-##########
-
+#################
+# PROMPT-THEMES #
+#################
+#Set-PoshPrompt -Theme blue-owl
+#Set-PoshPrompt -Theme ys
+#Set-PoshPrompt -Theme powerlevel10k_rainbow
 function prompt{
 	$host.UI.RawUI.WindowTitle = "$(Get-Location)"
 	# The at sign creates an array in case only one history item exists.

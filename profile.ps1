@@ -46,13 +46,13 @@ Set-PSReadLineKeyHandler -Chord 'Alt+.' -ScriptBlock {
 ###########
 Set-Alias -Name new -Value New-Item
 Set-Alias -Name Keep-History -Value fnHistory
-Set-Alias -Name np -Value $env:windir + '\system32\notepad.exe'
-Set-Alias -Name npp -Value $env:ProgramFiles + '\Notepad++\notepad++.exe'
-Set-Alias -Name edge -Value $env:LOCALAPPDATA + '\Microsoft\*\MicrosoftEdge.exe'
-Set-Alias -Name chrome -Value $env:ProgramFiles + '\Google\Chrome\Application\chrome.exe'
-Set-Alias -Name fox -Value $env:ProgramFiles + '\Firefox Developer Edition\firefox.exe'
-Set-Alias -Name code -Value $env:LOCALAPPDATA + '\Programs\Microsoft VS Code\Code.exe'
-Set-Alias -Name wt -Value $env:LOCALAPPDATA + '\Microsoft\WindowsApps\wt.exe'
+Set-Alias -Name np -Value $($env:windir + '\system32\notepad.exe')
+Set-Alias -Name npp -Value $($env:ProgramFiles + '\Notepad++\notepad++.exe')
+Set-Alias -Name edge -Value $($env:LOCALAPPDATA + '\Microsoft\*\MicrosoftEdge.exe')
+Set-Alias -Name chrome -Value $($env:ProgramFiles + '\Google\Chrome\Application\chrome.exe')
+Set-Alias -Name fox -Value $($env:ProgramFiles + '\Firefox Developer Edition\firefox.exe')
+Set-Alias -Name code -Value $($env:LOCALAPPDATA + '\Programs\Microsoft VS Code\Code.exe')
+Set-Alias -Name wt -Value $($env:LOCALAPPDATA + '\Microsoft\WindowsApps\wt.exe')
 
 #############
 # FUNCTIONS #
@@ -62,7 +62,7 @@ function fnHistory{
 	notepad C:\Temp\script.ps1
 }
 function browseFox{
-	$env:ProgramFiles + '\Firefox Developer Edition\firefox.exe' + 'https://www.google.com/search?client=firefox-b-1-d&q=boat'
+	$($env:ProgramFiles + '\Firefox Developer Edition\firefox.exe') + 'https://www.google.com/search?client=firefox-b-1-d&q=boat'
 }
 
 #################

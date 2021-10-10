@@ -38,9 +38,10 @@ If(!(Test-Path $($env:HOMEDRIVE + '\Temp'))){
 ############################
 #Get the users current path value
 $CurrentValue = [Environment]::GetEnvironmentVariable("Path", "User")    
-#Add the new path             
-[Environment]::SetEnvironmentVariable("Path", $CurrentValue + [System.IO.Path]::PathSeparator + "C:\Temp", "User")
-
+#Add the new path, careful when using this second part manually
+If($CurrentValue){
+	[Environment]::SetEnvironmentVariable("Path", $CurrentValue + [System.IO.Path]::PathSeparator + "$env:HOMEDRIVE\Temp", "User")
+}
 
 ##################################
 # WEB-SCRAPE GITHUB SCRIPT FILES #

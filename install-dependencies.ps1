@@ -33,6 +33,15 @@ If(!(Test-Path $($env:HOMEDRIVE + '\Temp'))){
 	New-Item -ItemType Directory -Path $env:HOMEDRIVE -Name "Temp"
 }
 
+############################
+# ADD NEW TEMP DIR TO PATH #
+############################
+#Get the users current path value
+$CurrentValue = [Environment]::GetEnvironmentVariable("Path", "User")    
+#Add the new path             
+[Environment]::SetEnvironmentVariable("Path", $CurrentValue + [System.IO.Path]::PathSeparator + "C:\Temp", "User")
+
+
 ##################################
 # WEB-SCRAPE GITHUB SCRIPT FILES #
 ##################################

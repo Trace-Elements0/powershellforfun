@@ -37,7 +37,7 @@ If(!(Test-Path "C:\Temp")){
 # WEB-SCRAPE GITHUB SCRIPT FILES #
 ##################################
 Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/profile.ps1" | Select-Object -ExpandProperty Content | Out-File $profile -Encoding unicode -Force
-Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Show-Object.ps1" -OutFile C:\Temp\Show-Object.ps1
-Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Select-TextOutput.ps1" -OutFile C:\Temp\Select-TextOutput.ps1
-Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Get-ParameterAlias.ps1" -OutFile C:\Temp\Get-ParameterAlias.ps1
-Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Get-AliasSuggestion.ps1" -OutFile C:\Temp\Get-AliasSuggestion.ps1
+Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Show-Object.ps1" -OutFile $($env:HOMEDRIVE + '\Temp\Show-Object.ps1')
+Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Select-TextOutput.ps1" -OutFile $($env:HOMEDRIVE + '\Temp\Select-TextOutput.ps1')
+Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Get-ParameterAlias.ps1" -OutFile $($env:HOMEDRIVE + '\Temp\Get-ParameterAlias.ps1')
+Invoke-WebRequest -Uri "raw.githubusercontent.com/Trace-Elements0/powershellforfun/main/Get-AliasSuggestion.ps1" -OutFile $($env:HOMEDRIVE + '\Temp\Get-AliasSuggestion.ps1')

@@ -58,8 +58,8 @@ Set-Alias -Name wt -Value $($env:LOCALAPPDATA + '\Microsoft\WindowsApps\wt.exe')
 # FUNCTIONS #
 ############# 
 function fnHistory{
-	Get-History | Foreach-Object {$_.CommandLine } > C:\Temp\script.ps1
-	notepad C:\Temp\script.ps1
+	Get-History | Foreach-Object {$_.CommandLine } > $($env:HOMEDRIVE + '\Temp\script.ps1')
+	notepad $($env:HOMEDRIVE + '\Temp\script.ps1')
 }
 function browseFox{
 	$($env:ProgramFiles + '\Firefox Developer Edition\firefox.exe') + 'https://www.google.com/search?client=firefox-b-1-d&q=boat'

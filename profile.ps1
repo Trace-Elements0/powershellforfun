@@ -31,14 +31,14 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -EditMode Windows
 Set-PSReadLineKeyHandler -Chord 'Alt+,' -ScriptBlock {
-	    Set-Location -
-	        [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-		    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+	Set-Location -
+		[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
+		[Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 Set-PSReadLineKeyHandler -Chord 'Alt+.' -ScriptBlock {
-	    Set-Location +
-	        [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-		    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
+	Set-Location +
+		[Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
+		[Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
 }
 
 ###########

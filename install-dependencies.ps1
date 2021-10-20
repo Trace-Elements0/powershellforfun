@@ -1,26 +1,29 @@
-########################################################################
-# THIS SCRIPT WILL INSTALL A PROFILE ALONG WITH DEPENDENCIES NEEDED.   #
-# GOOD WITH POWERSHELL CORE 7.X; WINDOWS POWERSHELL COULD HAVE ISSUES. #
-########################################################################
+<#
+    .AUTHOR
+        Julian D. Edington (github.com/jedington).
+	.SYNOPSIS
+        Installer script for 'powershellforfun' by Jorge Sanchez (github.com/Trace-Elements0).
+    .DESCRIPTION
+        Installs:
+            - 'powershellforfun' profile.
+            - 4 referenced script files also within the 'powershellforfun' repo.
+            - 4 open-source modules (posh-git, oh-my-posh, PSReadline, Terminal-Icons).
+    .NOTES
+		This most likely won't work in any PowerShell versions older than 5.1*
+#>
 
-
-####################################################
-# IF NOT IN A SESSION AS ADMIN, RELOADS A SEPARATE # 
-# INSTANCE + CONTINUES SCRIPT WITHIN THAT SESSION  #
-####################################################
+##########################################
+# FORCE RUN SCRIPT AS ADMIN AND CONTINUE #
+##########################################
 param([switch]$elevated)
-function Test-Admin {
-    $currentUser = New-Object Security.Principal.WindowsPrincipal $(
-        [Security.Principal.WindowsIdentity]::GetCurrent()
-    )
-    $currentUser.IsInRole(
-        [Security.Principal.WindowsBuiltinRole]::Administrator
-    )
-}
-if (!(Test-Admin)) {
-    if ($elevated) {
-        # tried to elevate, did not work, aborting
-    } 
+if (!($elevated)) {
+    if ([bool]($PSVersionTable | Where-Object PSVersion -like 5.1* -EA 0)) {
+        Start-Process powershell.exe -Verb RunAs -ArgumentList (
+            '-noprofile -noexit -file "{0}" -elevated' -f (
+                $myinvocation.MyCommand.Definition
+            )
+        )    
+    }
     else {
         Start-Process pwsh.exe -Verb RunAs -ArgumentList (
             '-noprofile -noexit -file "{0}" -elevated' -f (
@@ -51,14 +54,14 @@ if (!(Get-InstalledModule Terminal-Icons -EA 0)) {
 # CREATE BLANK PROFILE IF ONE DOESNT EXIST #
 ############################################
 if (!(Test-Path $profile)) {
-	New-Item -ItemType File -Force -Path $profile
+	New-Item -ItemType File -Path $profile -Force
 }
 
 ###################################################
 # CREATE BLANK C:\TEMP FOLDER IF ONE DOESNT EXIST #
 ###################################################
 if (!(Test-Path "$env:HOMEDRIVE\Temp")) {
-	New-Item -ItemType Directory -Path $env:HOMEDRIVE -Name 'Temp'
+	New-Item -ItemType Directory -Path $env:HOMEDRIVE -Name 'Temp' -Force
 }
 
 ############################

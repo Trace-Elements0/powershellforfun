@@ -9,7 +9,7 @@
             - 4 referenced script files also within the 'powershellforfun' repo.
             - 4 open-source modules (posh-git, oh-my-posh, PSReadline, Terminal-Icons).
     .NOTES
-		This most likely won't work in any PowerShell versions older than 5.1*
+        This most likely won't work in any PowerShell versions older than 5.1*
 #>
 
 ##########################################
@@ -76,11 +76,48 @@ if ([bool]$currentValue) {
     )
 }
 
+###################
+# PROFILE CHOICES #
+###################
+do {
+    Write-Host '<<<----------------------->>>' -f Magenta
+    Write-Host '<<< [1] OVERWRITE PROFILE >>>' -f Magenta
+    Write-Host '<<< [2] APPEND TO PROFILE >>>' -f Magenta
+    Write-Host '<<< [3] SKIP              >>>' -f Magenta
+    Write-Host '<<<----------------------->>>' -f Magenta
+    Write-Host 'WARNING, OPT 1 OVERWRITES POWERSHELL USER PROFILE COMPLETELY.' -f Magenta
+    try {
+        [int]$num = Read-Host `n'Choose: 1 / 2 / 3'
+        if (($num -le 0) -or ($num -ge 6)) {
+            Write-Host `n'Wrong... Only accepts these options: 1/2/3'`n -f Magenta
+        }
+    }
+    catch [System.OutOfMemoryException] {
+        # catch invalid input
+    }
+} while (($num -le 0) -or ($num -ge 4))
+
 ##################################
 # WEB-SCRAPE GITHUB SCRIPT FILES #
 ##################################
 $repo = 'raw.githubusercontent.com/Trace-Elements0/powershellforfun/main'
-Invoke-WebRequest -Uri "$repo/profile.ps1" | Select-Object -ExpandProperty Content | Out-File $profile -Encoding unicode -Force
+
+switch($num) {
+    1 {
+        Invoke-WebRequest -Uri "$repo/profile.ps1" | 
+            Select-Object -ExpandProperty Content | 
+                Out-File $profile -Encoding unicode -Force
+    }
+    2 {
+        Invoke-WebRequest -Uri "$repo/profile.ps1" | 
+            Select-Object -ExpandProperty Content |
+                Out-File $profile -Append -Encoding unicode -Force
+    }
+    3 {
+        exit
+    }
+}
+
 Invoke-WebRequest -Uri "$repo/Show-Object.ps1" -OutFile "$env:HOMEDRIVE\Temp\Show-Object.ps1"
 Invoke-WebRequest -Uri "$repo/Select-TextOutput.ps1" -OutFile "$env:HOMEDRIVE\Temp\Select-TextOutput.ps1"
 Invoke-WebRequest -Uri "$repo/Get-ParameterAlias.ps1" -OutFile "$env:HOMEDRIVE\Temp\Get-ParameterAlias.ps1"

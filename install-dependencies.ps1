@@ -50,13 +50,6 @@ if (!(Get-InstalledModule Terminal-Icons -EA 0)) {
 	Install-Module Terminal-Icons -Scope CurrentUser -Confirm:$False -Force
 }
 
-############################################
-# CREATE BLANK PROFILE IF ONE DOESNT EXIST #
-############################################
-if (!(Test-Path $profile)) {
-	New-Item -ItemType File -Path $profile -Force
-}
-
 ###################################################
 # CREATE BLANK C:\TEMP FOLDER IF ONE DOESNT EXIST #
 ###################################################
@@ -76,48 +69,63 @@ if ([bool]$currentValue) {
     )
 }
 
-###################
-# PROFILE CHOICES #
-###################
-do {
-    Write-Host '<<<----------------------->>>' -f Magenta
-    Write-Host '<<< [1] OVERWRITE PROFILE >>>' -f Magenta
-    Write-Host '<<< [2] APPEND TO PROFILE >>>' -f Magenta
-    Write-Host '<<< [3] SKIP              >>>' -f Magenta
-    Write-Host '<<<----------------------->>>' -f Magenta
-    Write-Host 'WARNING, OPT 1 OVERWRITES POWERSHELL USER PROFILE COMPLETELY.' -f Magenta
-    try {
-        [int]$num = Read-Host `n'Choose: 1 / 2 / 3'
-        if (($num -le 0) -or ($num -ge 6)) {
-            Write-Host `n'Wrong... Only accepts these options: 1/2/3'`n -f Magenta
+############################################
+# CREATE BLANK PROFILE IF ONE DOESNT EXIST #
+############################################
+$repo = 'raw.githubusercontent.com/Trace-Elements0/powershellforfun/main'
+if (!(Test-Path $profile)) {
+	New-Item -ItemType File -Path $profile -Force
+    
+    ##################################
+    # WEB-SCRAPE GITHUB SCRIPT FILES #
+    ##################################
+    Invoke-WebRequest -Uri "$repo/profile.ps1" | 
+        Select-Object -ExpandProperty Content | 
+            Out-File $profile -Encoding unicode -Force
+
+}
+else {
+    ###################
+    # PROFILE CHOICES #
+    ###################
+    do {
+        Write-Host '<<<----------------------->>>' -f Magenta
+        Write-Host '<<< [1] OVERWRITE PROFILE >>>' -f Magenta
+        Write-Host '<<< [2] APPEND TO PROFILE >>>' -f Magenta
+        Write-Host '<<< [3] SKIP              >>>' -f Magenta
+        Write-Host '<<<----------------------->>>' -f Magenta
+        Write-Host 'WARNING, OPT 1 OVERWRITES POWERSHELL USER PROFILE COMPLETELY.' -f Magenta
+        try {
+            [int]$num = Read-Host `n'Choose: 1 / 2 / 3'
+            if (($num -le 0) -or ($num -ge 6)) {
+                Write-Host `n'Wrong... Only accepts these options: 1/2/3'`n -f Magenta
+            }
+        }
+        catch [System.OutOfMemoryException] {
+            # catch invalid input
+        }
+    } while (($num -le 0) -or ($num -ge 4))
+    switch($num) {
+        1 {
+            Invoke-WebRequest -Uri "$repo/profile.ps1" | 
+                Select-Object -ExpandProperty Content | 
+                    Out-File $profile -Encoding unicode -Force
+        }
+        2 {
+            Invoke-WebRequest -Uri "$repo/profile.ps1" | 
+                Select-Object -ExpandProperty Content |
+                    Out-File $profile -Append -Encoding unicode -Force
+        }
+        3 {
+            # skip
         }
     }
-    catch [System.OutOfMemoryException] {
-        # catch invalid input
-    }
-} while (($num -le 0) -or ($num -ge 4))
+}
+
 
 ##################################
 # WEB-SCRAPE GITHUB SCRIPT FILES #
 ##################################
-$repo = 'raw.githubusercontent.com/Trace-Elements0/powershellforfun/main'
-
-switch($num) {
-    1 {
-        Invoke-WebRequest -Uri "$repo/profile.ps1" | 
-            Select-Object -ExpandProperty Content | 
-                Out-File $profile -Encoding unicode -Force
-    }
-    2 {
-        Invoke-WebRequest -Uri "$repo/profile.ps1" | 
-            Select-Object -ExpandProperty Content |
-                Out-File $profile -Append -Encoding unicode -Force
-    }
-    3 {
-        exit
-    }
-}
-
 Invoke-WebRequest -Uri "$repo/Show-Object.ps1" -OutFile "$env:HOMEDRIVE\Temp\Show-Object.ps1"
 Invoke-WebRequest -Uri "$repo/Select-TextOutput.ps1" -OutFile "$env:HOMEDRIVE\Temp\Select-TextOutput.ps1"
 Invoke-WebRequest -Uri "$repo/Get-ParameterAlias.ps1" -OutFile "$env:HOMEDRIVE\Temp\Get-ParameterAlias.ps1"

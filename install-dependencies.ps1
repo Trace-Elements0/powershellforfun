@@ -76,13 +76,12 @@ $repo = 'raw.githubusercontent.com/Trace-Elements0/powershellforfun/main'
 if (!(Test-Path $profile)) {
 	New-Item -ItemType File -Path $profile -Force
     
-    ##################################
-    # WEB-SCRAPE GITHUB SCRIPT FILES #
-    ##################################
+    ####################################
+    # WEB-SCRAPE GITHUB PROFILE SCRIPT #
+    ####################################
     Invoke-WebRequest -Uri "$repo/profile.ps1" | 
         Select-Object -ExpandProperty Content | 
             Out-File $profile -Encoding unicode -Force
-
 }
 else {
     ###################
@@ -97,31 +96,35 @@ else {
         Write-Host 'WARNING, OPT 1 OVERWRITES POWERSHELL USER PROFILE COMPLETELY.' -f Magenta
         try {
             [int]$num = Read-Host `n'Choose: 1 / 2 / 3'
-            if (($num -le 0) -or ($num -ge 6)) {
-                Write-Host `n'Wrong... Only accepts these options: 1/2/3'`n -f Magenta
+            if ('1','2','3' -notcontains $num) {
+                Write-Host '<<<----------------------->>>' -f Magenta
+		        Write-Host '<<<  WRONG...  TRY AGAIN  >>>' -f Magenta
             }
         }
         catch [System.OutOfMemoryException] {
             # catch invalid input
         }
-    } while (($num -le 0) -or ($num -ge 4))
+    } while ('1','2','3' -notcontains $num)
+    
+    ####################################
+    # WEB-SCRAPE GITHUB PROFILE SCRIPT #
+    ####################################
     switch($num) {
-        1 {
+        '1' {
             Invoke-WebRequest -Uri "$repo/profile.ps1" | 
                 Select-Object -ExpandProperty Content | 
                     Out-File $profile -Encoding unicode -Force
         }
-        2 {
+        '2' {
             Invoke-WebRequest -Uri "$repo/profile.ps1" | 
                 Select-Object -ExpandProperty Content |
                     Out-File $profile -Append -Encoding unicode -Force
         }
-        3 {
-            # skip
+        '3' {
+            Write-Host 'SKIPPING PROFILE INSTALL...' -f Magenta
         }
     }
 }
-
 
 ##################################
 # WEB-SCRAPE GITHUB SCRIPT FILES #

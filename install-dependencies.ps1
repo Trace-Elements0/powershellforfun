@@ -1,7 +1,7 @@
 <#
     .AUTHOR
         Julian D. Edington (github.com/jedington).
-	.SYNOPSIS
+    .SYNOPSIS
         Installer script for 'powershellforfun' by Jorge Sanchez (github.com/Trace-Elements0).
     .DESCRIPTION
         Installs:
@@ -17,7 +17,7 @@
 ##########################################
 param([switch]$elevated)
 if (!($elevated)) {
-    if ([bool]($PSVersionTable | Where-Object PSVersion -like 5.1* -EA 0)) {
+    if ([bool]($PSVersionTable | Where-Object PSVersion -le 5 -EA 0)) {
         Start-Process powershell.exe -Verb RunAs -ArgumentList (
             '-noprofile -noexit -file "{0}" -elevated' -f (
                 $myinvocation.MyCommand.Definition
@@ -33,6 +33,13 @@ if (!($elevated)) {
     }
     exit
 }
+
+##################
+# DEBUG SETTINGS #
+##################
+#- Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Continue'
+$WarningPreference = 'SilentlyContinue'
 
 ######################################
 # INSTALL MODULES IF THEY DONT EXIST #
@@ -64,7 +71,7 @@ if (!(Test-Path "$env:HOMEDRIVE\Temp")) {
 $currentValue = [Environment]::GetEnvironmentVariable('Path', 'User')    
 # Add the new path, careful when using this second part manually
 if ([bool]$currentValue) {
-	[Environment]::SetEnvironmentVariable(
+    [Environment]::SetEnvironmentVariable(
         'Path', $currentValue + [System.IO.Path]::PathSeparator + "$env:HOMEDRIVE\Temp", 'User'
     )
 }
@@ -98,7 +105,7 @@ else {
             [int]$num = Read-Host `n'Choose: 1 / 2 / 3'
             if ('1','2','3' -notcontains $num) {
                 Write-Host '<<<----------------------->>>' -f Magenta
-		        Write-Host '<<<  WRONG...  TRY AGAIN  >>>' -f Magenta
+                Write-Host '<<<  WRONG...  TRY AGAIN  >>>' -f Magenta
             }
         }
         catch [System.OutOfMemoryException] {

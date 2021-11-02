@@ -61,18 +61,18 @@ if (!(Get-InstalledModule Terminal-Icons -EA 0)) {
 # CREATE BLANK C:\TEMP FOLDER IF ONE DOESNT EXIST #
 ###################################################
 if (!(Test-Path "$env:HOMEDRIVE\Temp")) {
-	New-Item -ItemType Directory -Path $env:HOMEDRIVE -Name 'Temp' -Force
+	New-Item -ItemType Directory -Path "$env:HOMEDRIVE\" -Name 'Temp' -Force
 }
 
 ############################
 # ADD NEW TEMP DIR TO PATH #
 ############################
 # Get the users current path value
-$currentValue = [Environment]::GetEnvironmentVariable('Path', 'User')    
+$userpath = [Environment]::GetEnvironmentVariable('Path', 'User')    
 # Add the new path, careful when using this second part manually
-if ([bool]$currentValue) {
+if ([bool]$userpath) {
     [Environment]::SetEnvironmentVariable(
-        'Path', $currentValue + [System.IO.Path]::PathSeparator + "$env:HOMEDRIVE\Temp", 'User'
+        'Path', $userpath + [System.IO.Path]::PathSeparator + "$env:HOMEDRIVE\Temp", 'User'
     )
 }
 
@@ -140,3 +140,10 @@ Invoke-WebRequest -Uri "$repo/Show-Object.ps1" -OutFile "$env:HOMEDRIVE\Temp\Sho
 Invoke-WebRequest -Uri "$repo/Select-TextOutput.ps1" -OutFile "$env:HOMEDRIVE\Temp\Select-TextOutput.ps1"
 Invoke-WebRequest -Uri "$repo/Get-ParameterAlias.ps1" -OutFile "$env:HOMEDRIVE\Temp\Get-ParameterAlias.ps1"
 Invoke-WebRequest -Uri "$repo/Get-AliasSuggestion.ps1" -OutFile "$env:HOMEDRIVE\Temp\Get-AliasSuggestion.ps1"
+
+##############
+# CLEAR VARS #
+##############
+Clear-Variable -Name 'userpath' -EA 0
+Clear-Variable -Name 'repo' -EA 0
+Clear-Variable -Name 'num' -EA 0
